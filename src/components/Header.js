@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import NavItem from './NavItem';
 import { useInventario } from '../context/InventarioContext';
@@ -6,8 +7,14 @@ import { useInventario } from '../context/InventarioContext';
 // Menú superior: navegación de gestión del inventario
 export default function Header() {
   const { totalUnidades } = useInventario();
+  const { pathname } = useLocation();
   const [menuAbierto, setMenuAbierto] = useState(false);
   const cerrar = () => setMenuAbierto(false);
+
+  // En móvil, cierra el menú cada vez que cambia la página (incluye el botón "atrás")
+  useEffect(() => {
+    setMenuAbierto(false);
+  }, [pathname]);
 
   const links = (
     <>
