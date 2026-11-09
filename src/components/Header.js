@@ -16,7 +16,7 @@ export default function Header() {
       <NavItem to="/inventario/nuevo" onClick={cerrar}>Agregar artículo</NavItem>
       <NavItem to="/carrito" onClick={cerrar}>
         Carrito
-        <span className="ml-1.5 rounded-full bg-np-accent px-2 py-0.5 text-xs font-bold text-white">{totalUnidades}</span>
+        <span className="ml-1.5 rounded-full bg-np-accent px-2 py-0.5 text-xs font-bold text-np-bg">{totalUnidades}</span>
       </NavItem>
     </>
   );

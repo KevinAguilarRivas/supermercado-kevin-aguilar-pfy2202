@@ -24,12 +24,12 @@ export default function Home() {
       <section className="bg-np-hero py-12 sm:py-[4.5rem]" aria-labelledby="hero-titulo">
         <div className="container-app grid items-center gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
           <div>
-            <p className="mb-3 font-bold uppercase tracking-[0.2em] text-cyan-200">Supermercado online</p>
+            <p className="mb-3 font-bold uppercase tracking-[0.2em] text-lime-300">Supermercado online</p>
             <h1 id="hero-titulo" className="mb-4 text-[clamp(2rem,5vw,3.4rem)] font-extrabold leading-[1.1]">
               Tu despensa completa
               <span className="block bg-np-title bg-clip-text text-transparent">a un clic</span>
             </h1>
-            <p className="mb-7 max-w-[52ch] text-xl text-[#e9e2ff]">
+            <p className="mb-7 max-w-[52ch] text-xl text-emerald-50/90">
               Administra el inventario de NextPixel Market: revisa el stock, filtra por categoría, agrega nuevos
               productos y arma tu carrito de compras.
             </p>
@@ -43,7 +43,7 @@ export default function Home() {
             {stats.map((s) => (
               <li key={s.texto} className="flex flex-col rounded-np border border-white/15 bg-np-bg/45 p-5">
                 <strong className="font-display text-2xl text-np-white sm:text-[1.8rem]">{s.valor}</strong>
-                <span className="text-[#e9e2ff]">{s.texto}</span>
+                <span className="text-emerald-50/90">{s.texto}</span>
               </li>
             ))}
           </ul>

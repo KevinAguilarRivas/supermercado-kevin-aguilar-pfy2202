@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* =========================================================
-   NextPixel Market — identidad visual reutilizada de NextPixel
-   (colores, fuentes y estilo de tarjetas) implementada con Tailwind.
+   NextPixel Market — identidad visual de NextPixel (logo, fuentes,
+   estilo neón y tarjetas) en tonos verdes, implementada con Tailwind.
    ========================================================= */
 
 @layer base {
@@ -60,7 +60,7 @@
     @apply px-3 py-1 text-sm;
   }
   .btn-primary {
-    @apply border border-np-primary bg-np-primary font-bold text-white hover:border-np-primary-dark hover:bg-np-primary-dark;
+    @apply border border-np-primary bg-np-primary font-bold text-np-bg hover:border-np-primary-dark hover:bg-np-primary-dark;
   }
   .btn-light {
     @apply border border-white/80 text-white hover:bg-white hover:text-np-bg;
@@ -78,7 +78,7 @@
       focus:outline-none focus-visible:ring-4 focus-visible:ring-np-primary/40;
   }
   .pill-active {
-    @apply border-np-primary bg-np-primary text-white;
+    @apply border-np-primary bg-np-primary text-np-bg;
   }
   .pill-idle {
     @apply border-np-border text-np-muted hover:border-np-accent hover:bg-np-surface-alt hover:text-white;
@@ -87,7 +87,7 @@
     @apply rounded bg-black/60 px-1.5 text-xs text-white;
   }
   .badge-accent {
-    @apply rounded-md bg-np-accent px-2 py-0.5 text-xs font-bold tracking-[0.04em] text-white;
+    @apply rounded-md bg-np-accent px-2 py-0.5 text-xs font-bold tracking-[0.04em] text-np-bg;
   }
 
   /* Formularios */

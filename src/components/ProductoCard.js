@@ -7,11 +7,11 @@ import { ICONOS_CATEGORIA } from '../data/articulos';
 export function ProductoPortada({ articulo, className = '' }) {
   return (
     <div
-      className={`relative grid place-items-center bg-[radial-gradient(circle_at_30%_20%,#4c1d95_0%,#2a1743_55%,#180e2b_100%)] ${className}`}
+      className={`relative grid place-items-center bg-[radial-gradient(circle_at_30%_20%,#065f46_0%,#143023_55%,#0a1a13_100%)] ${className}`}
       role="img"
       aria-label={`Imagen de ${articulo.nombre}`}
     >
-      <span className="text-6xl drop-shadow-[0_8px_24px_rgba(232,121,249,0.45)] sm:text-7xl">
+      <span className="text-6xl drop-shadow-[0_8px_24px_rgba(163,230,53,0.45)] sm:text-7xl">
         {ICONOS_CATEGORIA[articulo.categoria] ?? '🛒'}
       </span>
     </div>
