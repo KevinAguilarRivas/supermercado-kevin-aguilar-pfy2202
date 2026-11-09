@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# NextPixel Market – Gestión de inventario
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sitio web en **React** para gestionar el inventario de un supermercado, **NextPixel Market**. Reutiliza la identidad visual de NextPixel (logo, paleta morado/fucsia/cian, fuentes Orbitron y Rajdhani, tarjetas y distribución) creada en Desarrollo Frontend I. Corresponde a la Experiencia 1 de la asignatura **Desarrollo Frontend II (PFY2202)** de Duoc UC e incluye lo pedido en las semanas 1, 2 y 3.
 
-## Available Scripts
+- **Autor:** Kevin Aguilar
+- **Sitio publicado (gh-pages):** `https://<tu-usuario>.github.io/supermercado-kevin-aguilar-pfy2202/`
 
-In the project directory, you can run:
+## Funcionalidades
 
-### `npm start`
+| Semana | Funcionalidad |
+|---|---|
+| S1 | Página de inicio con hero, productos destacados y categorías. **Menú inferior** (en el footer) para ir a *Quiénes somos* y *Nuestras tiendas*, con **React Router**. |
+| S2 | **Menú superior** de gestión, **estado global** de artículos (nombre, marca, tipo de producto, precio y stock), **formulario** con validaciones para agregar artículos y **tabla** con todo el inventario. |
+| S3 | **Filtro por categoría** (píldoras en escritorio, `select` en móvil) y búsqueda por nombre o marca: se calculan a partir del inventario sin modificar los datos originales. Vista en **tabla o tarjetas**. **Detalle del artículo** en `/inventario/:articuloId`, con botón para agregar al carrito que **descuenta el stock**. **Carrito de compras** con botones **+ / −**, eliminar y vaciar, que **actualizan el inventario general**. |
+| Extra | Diseño responsive y persistencia en `localStorage`. |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tecnologías
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React 19 (Create React App)
+- React Router DOM 7: `HashRouter`, rutas anidadas, parámetros dinámicos, `React.lazy` + `Suspense`
+- Context API + `useReducer` para el estado global
+- Tailwind CSS 3: tema con la paleta de la marca en `tailwind.config.js`, clases reutilizables con `@apply` y arbitrary values
+- gh-pages para la publicación
 
-### `npm test`
+## Estructura del proyecto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+├── App.js                      # Solo renderiza AppRoutes
+├── index.js                    # HashRouter + InventarioProvider
+├── index.css                   # Directivas de Tailwind y clases reutilizables (@apply)
+├── routes/AppRoutes.js         # Archivo central de rutas (lazy loading + rutas anidadas)
+├── layouts/MainLayout.js       # Header + <Outlet/> + Footer (menú inferior)
+├── context/
+│   ├── InventarioContext.js    # Estado global: reducer, acciones y hook useInventario()
+│   └── inventarioReducer.test.js
+├── data/articulos.js           # Categorías, íconos e inventario inicial
+├── components/                 # Componentes reutilizables
+│   ├── Logo.js  Header.js  Footer.js  NavItem.js  Button.js  PageHeader.js
+│   ├── ProductoCard.js  ArticulosTable.js  CategoriaFilter.js  QuantityControl.js
+│   └── StockBadge.js  Loader.js  formato.js
+└── pages/                      # Una página por ruta
+    ├── Home.js  QuienesSomos.js  NuestrasTiendas.js
+    ├── Inventario.js  ArticuloDetalle.js  AgregarArticulo.js
+    └── Carrito.js  NotFound.js
+```
 
-### `npm run build`
+## Rutas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Ruta | Página |
+|---|---|
+| `/` | Inicio |
+| `/quienes-somos` | Quiénes somos |
+| `/nuestras-tiendas` | Nuestras tiendas |
+| `/inventario` | Lista del inventario con filtro por categoría |
+| `/inventario/nuevo` | Formulario para agregar un artículo |
+| `/inventario/:articuloId` | Detalle del artículo |
+| `/carrito` | Carrito de compras |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Cómo se maneja el estado
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+El estado global vive en `InventarioContext` y lo administra un `useReducer`:
 
-### `npm run eject`
+```js
+{ articulos: [...], carrito: [{ id, cantidad }] }
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Acciones del reducer: `AGREGAR_ARTICULO`, `AGREGAR_AL_CARRITO`, `AUMENTAR_CANTIDAD`, `DISMINUIR_CANTIDAD`, `QUITAR_DEL_CARRITO`, `VACIAR_CARRITO`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Cada acción devuelve **copias nuevas** de los arreglos (`map`, `filter`, spread) y nunca modifica el estado anterior.
+- Al agregar o aumentar en el carrito se **resta** stock. Al disminuir, quitar o vaciar se **devuelve** al inventario.
+- El filtro guarda solo la categoría elegida (`useState`). La lista filtrada se calcula con `useMemo`, así que el inventario original queda intacto.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Instalación y uso
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+npm start       # http://localhost:3000
+npm test        # pruebas del reducer
+npm run build   # build de producción
+```
 
-## Learn More
+## Publicación en GitHub Pages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run deploy
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este comando compila el proyecto y sube la carpeta `build` a la rama `gh-pages`. Después, en GitHub ve a **Settings → Pages** y elige la rama `gh-pages` como fuente.
