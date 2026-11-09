@@ -3,7 +3,8 @@
 Sitio web en **React** para gestionar el inventario de un supermercado, **NextPixel Market**. Reutiliza la identidad visual de NextPixel (logo, fuentes Orbitron y Rajdhani, estilo neón, tarjetas y distribución) creada en Desarrollo Frontend I, con una paleta verde cyberpunk adaptada al rubro supermercado. Corresponde a la Experiencia 1 de la asignatura **Desarrollo Frontend II (PFY2202)** de Duoc UC e incluye lo pedido en las semanas 1, 2 y 3.
 
 - **Autor:** Kevin Aguilar
-- **Sitio publicado (gh-pages):** `https://<tu-usuario>.github.io/supermercado-kevin-aguilar-pfy2202/`
+- **Sitio publicado (gh-pages):** https://kevinaguilarrivas.github.io/supermercado-kevin-aguilar-pfy2202/
+- **Repositorio:** https://github.com/KevinAguilarRivas/supermercado-kevin-aguilar-pfy2202
 
 ## Funcionalidades
 
